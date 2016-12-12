@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class Shooter : MonoBehaviour {
 
 	public Rigidbody player;
+	public float velosity;
 
 	[Header ("Arma Actual")]
 	public int Arma; 
@@ -83,7 +84,7 @@ public class Shooter : MonoBehaviour {
 			}
 		} 
 		else {
-			if (player.velocity.magnitude > 0) { 
+			if (player.velocity.magnitude > velosity) { 
 				if (anguloDisparo > currentWeapon.anguloMoveMin) {
 					if (angleTime >= currentWeapon.angleDecreaseRate) {
 						anguloDisparo -= currentWeapon.anguloDecrease;
