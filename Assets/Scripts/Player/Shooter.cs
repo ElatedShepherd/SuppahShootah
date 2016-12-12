@@ -7,9 +7,8 @@ using System.Collections.Generic;
 public class Shooter : MonoBehaviour {
 
 	public Rigidbody player;
-	public float angleMoveMin;
 
-	[Range(0,1)]
+	[Header ("Arma Actual")]
 	public int Arma; 
 
 	[Serializable]
@@ -21,9 +20,14 @@ public class Shooter : MonoBehaviour {
 		public float cadencia;
 		[Space (5)]
 		public float anguloDisparoMax;
+		public float anguloDisparoMin;
+		public float anguloMoveMin;
+		[Space (2)]
 		public float anguloIncremento;
 		public float anguloDecrease;
 		public float angleDecreaseRate;
+		[Space (5)]
+		public Sprite icon;
 	}
 
 	[Header ("Armas")]
@@ -80,14 +84,14 @@ public class Shooter : MonoBehaviour {
 		} 
 		else {
 			if (player.velocity.magnitude > 0) { 
-				if (anguloDisparo > angleMoveMin) {
+				if (anguloDisparo > currentWeapon.anguloMoveMin) {
 					if (angleTime >= currentWeapon.angleDecreaseRate) {
 						anguloDisparo -= currentWeapon.anguloDecrease;
 						angleTime = 0;
 					}
 				}
 			} else { 
-				if (anguloDisparo > 0) {
+				if (anguloDisparo > currentWeapon.anguloDisparoMin) {
 					if (angleTime >= currentWeapon.angleDecreaseRate) {
 						anguloDisparo -= currentWeapon.anguloDecrease;
 						angleTime = 0;
@@ -97,8 +101,8 @@ public class Shooter : MonoBehaviour {
 		}
 
 		//Si nos movemos setteamos el ángulo al minimo establecido
-		if (player.velocity.magnitude > 0 && anguloDisparo < angleMoveMin) {
-			anguloDisparo = angleMoveMin;
+		if (player.velocity.magnitude > 0 && anguloDisparo < currentWeapon.anguloMoveMin) {
+			anguloDisparo = currentWeapon.anguloMoveMin;
 		}
 	}
 

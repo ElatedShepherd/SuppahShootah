@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class WeaponPickUp : MonoBehaviour {
 
 	public Shooter s;
 	PUController puC;
+	public GameObject timerCanvas;
+	public Image icon;
+	public Image timeline;
 
 	public int weaponID;
 	public float weaponTime;
@@ -24,15 +28,24 @@ public class WeaponPickUp : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (picked){
-			currentTime += Time.deltaTime;
 			if (!changed) {
 				ChangeWeapon (weaponID);
 				GetComponent<MeshRenderer> ().enabled = false;
-			 }
+				icon.sprite = s.WeaponList[weaponID].icon;
+				timeline.fillAmount = 1;
+				timerCanvas.SetActive(true);
+			}
+		
+				currentTime += Time.deltaTime;
+
+			if (timerCanvas)
+				timeline.fillAmount = (weaponTime - currentTime) / weaponTime;
+
 		}
 
 		if (currentTime >= weaponTime) {
 			ChangeWeapon (oldWeapon);
+			timerCanvas.SetActive(false);
 			Destroy (gameObject);
 		}
 	}
