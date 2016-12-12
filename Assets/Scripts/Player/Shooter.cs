@@ -15,20 +15,22 @@ public class Shooter : MonoBehaviour {
 	[Serializable]
 	public class Weapon { 
 		public string name;
+		public Sprite icon;
 		public GameObject bullet;
+		[Space (3)]
+		public float damage;
 		public int bulletAmount;
 		public float bulletSpeed;
 		public float cadencia;
-		[Space (5)]
+		[Space (3)]
 		public float anguloDisparoMax;
 		public float anguloDisparoMin;
 		public float anguloMoveMin;
-		[Space (2)]
+		[Space (3)]
 		public float anguloIncremento;
 		public float anguloDecrease;
 		public float angleDecreaseRate;
-		[Space (5)]
-		public Sprite icon;
+
 	}
 
 	[Header ("Armas")]
@@ -39,21 +41,18 @@ public class Shooter : MonoBehaviour {
 	public Image image1;
 	public Image image2;
 
-	private  Weapon currentWeapon;
+	public  Weapon currentWeapon;
 	private float anguloDisparo = 0;
 	private float myTime;
 	private float spreadTime;
 	private float angleTime;
 	private float colorAngulo;
 
-	private CameraFollow mainCamera;
-	private ParticleSystem humo;
+	public CameraFollow mainCamera;
+	public ParticleSystem humo;
 
 	// Use this for initialization
 	void Start () {
-
-		mainCamera = FindObjectOfType<CameraFollow> ();
-		humo = FindObjectOfType<ParticleSystem> ();
 		currentWeapon = WeaponList [Arma];
 	}
 

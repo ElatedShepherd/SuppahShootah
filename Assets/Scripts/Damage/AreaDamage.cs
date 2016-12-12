@@ -6,6 +6,7 @@ public class AreaDamage : MonoBehaviour {
 	[Header("Indicator Variables")]
 	public GameObject splashIndicator;
 	public float radius;
+	public float damage;
 
 	[Header("Timers")]
 	public float tellTime;
