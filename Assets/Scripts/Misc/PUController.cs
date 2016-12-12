@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PUController : MonoBehaviour {
@@ -10,6 +11,11 @@ public class PUController : MonoBehaviour {
 
 	public float SpawnRatio;
 	float currentTime;
+	[Space(5)]
+	public GameObject UICanvas;
+	public Image icon;
+	public Image timeline;
+
 
 	// Use this for initialization
 	void Start () {
@@ -40,6 +46,9 @@ public class PUController : MonoBehaviour {
 
 		GameObject a;
 		a = (GameObject)Instantiate (wp, t.position, t.rotation);
+		a.GetComponent<WeaponPickUp>().timerCanvas = UICanvas;
+		a.GetComponent<WeaponPickUp>().icon = icon;
+		a.GetComponent<WeaponPickUp>().timeline = timeline;
 
 		currentTime = 0;
 	}
