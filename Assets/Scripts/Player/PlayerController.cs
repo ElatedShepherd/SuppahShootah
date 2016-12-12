@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
 	private Rigidbody myRigidbody;
 	private Camera mainCamera;
 
+	private Animator animator;
+
 
 	// Use this for initialization
 	void Start ()
@@ -34,6 +36,10 @@ public class PlayerController : MonoBehaviour {
 		Vector3 currentPosition = (myRigidbody.position);
 
 		myRigidbody.velocity = new Vector3 (moveHorizontal, 0, moveVertical);
+
+		//Control de animaciones
+
+		animator.SetFloat ("Speed", moveVertical);
 
 		//Rotación
 
