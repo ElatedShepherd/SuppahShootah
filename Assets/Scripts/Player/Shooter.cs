@@ -17,8 +17,8 @@ public class Shooter : MonoBehaviour {
 		public string name;
 		public Sprite icon;
 		public GameObject bullet;
-		[Space (3)]
-		public float damage;
+		[Space(3)]
+		public float bulletDamage;
 		public int bulletAmount;
 		public float bulletSpeed;
 		public float cadencia;
@@ -30,7 +30,9 @@ public class Shooter : MonoBehaviour {
 		public float anguloIncremento;
 		public float anguloDecrease;
 		public float angleDecreaseRate;
-
+		[Space (3)]
+		public Sprite icon;
+		public AudioClip weaponSound;
 	}
 
 	[Header ("Armas")]
@@ -125,6 +127,7 @@ public class Shooter : MonoBehaviour {
 
 		myTime = 0;
 
+		GetComponent<AudioSource>().clip = currentWeapon.weaponSound;
 		GetComponent<AudioSource>().Play();
 		mainCamera.Shake();
 	}

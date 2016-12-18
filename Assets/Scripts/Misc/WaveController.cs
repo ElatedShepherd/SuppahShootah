@@ -87,8 +87,8 @@ public class WaveController : MonoBehaviour {
 
 		GameObject a;
 		a = (GameObject)Instantiate (enemy, spawner.position, spawner.rotation);
-		a.GetComponent<EnemyCoreController>().player = player;
 		a.GetComponent<Damage>().wc = this;
+		a.GetComponent<Damage>().player = player;
 
 		comp[e].spawned ++;
 		spawnedEnemies ++;

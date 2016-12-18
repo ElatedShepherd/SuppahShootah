@@ -22,7 +22,7 @@ public class WeaponPickUp : MonoBehaviour {
 	void Start () {
 		puC = GameObject.Find("Wave Manager").GetComponent<PUController>();
 		s = GameObject.Find ("Shooter").GetComponent<Shooter>();
-		oldWeapon = s.Arma;
+		oldWeapon = 0;
 	}
 	
 	// Update is called once per frame
