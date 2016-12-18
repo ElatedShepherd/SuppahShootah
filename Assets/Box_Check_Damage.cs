@@ -6,7 +6,7 @@ public class Box_Check_Damage : MonoBehaviour {
 
  
 	void OnTriggerEnter(Collider col) {
-		
-		SceneManager.LoadScene("Lose");
+		col.gameObject.GetComponent<Damage>().hitPoints -= 1;
+		col.gameObject.GetComponent<Damage>().particula.Emit(1);
 	}
 }

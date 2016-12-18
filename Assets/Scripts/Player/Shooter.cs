@@ -31,7 +31,6 @@ public class Shooter : MonoBehaviour {
 		public float anguloDecrease;
 		public float angleDecreaseRate;
 		[Space (3)]
-		public Sprite icon;
 		public AudioClip weaponSound;
 	}
 
@@ -72,8 +71,8 @@ public class Shooter : MonoBehaviour {
 		image1.fillAmount = anguloDisparo / 360;
 		image2.fillAmount = anguloDisparo / 360;
 
-		image1.color = Color.Lerp(new Color(1, 0.92F, 0.16F, 0.7f), new Color(1, 0, 0, 0.7f), colorAngulo);
-		image2.color = Color.Lerp(new Color(1, 0.92F, 0.16F, 0.7f), new Color(1, 0, 0, 0.7f), colorAngulo);
+		image1.color = Color.Lerp(new Color(1, 0.92F, 0.16F, 0.2f), new Color(1, 0, 0, 0.2f), colorAngulo);
+		image2.color = Color.Lerp(new Color(1, 0.92F, 0.16F, 0.2f), new Color(1, 0, 0, 0.2f), colorAngulo);
 
 		myTime += Time.deltaTime;
 		angleTime += Time.deltaTime;

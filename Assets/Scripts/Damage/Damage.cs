@@ -1,21 +1,30 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Damage : MonoBehaviour {
 
 	
 	public float hitPoints; 
+	public float maxHitpoints;
 	public bool isEnemy = false;
+	public bool isPlayer;
 	[Space(3)]
 	public LayerMask[] damageLayers;
 
 	[Header("Referencias")]
 	public WaveController wc;
 	public GameObject player;
-
+	public ParticleSystem particula;
+	public Image hpBar; 
 
 	void Update () {
 				
+		if (isPlayer){
+			hpBar.fillAmount = hitPoints/maxHitpoints;
+		}
+
 		if (hitPoints <= 0){
 			
 			if (isEnemy){
@@ -25,16 +34,37 @@ public class Damage : MonoBehaviour {
 				GetComponent<ZombieController>().enabled = false;
 				this.enabled = false;
 			}
-
-			Destroy(gameObject);
+			else if (isPlayer)
+				SceneManager.LoadScene("Lose");
+			else
+				Destroy(gameObject);
 		}
 	}
 
 	void OnCollisionEnter (Collision col){
-		if (col.gameObject.GetComponent<AreaDamage>() != null)
-			hitPoints -= col.gameObject.GetComponent<AreaDamage>().damage;
-		else
-			hitPoints -= player.GetComponentInChildren<Shooter>().currentWeapon.bulletDamage;
+		for (int i = 0; i < damageLayers.Length; i++){
+			if (1<<col.gameObject.layer == damageLayers[i].value){
+				if (isPlayer){
+					if (col.gameObject.GetComponent<AreaDamage>() != null){
+						particula.Emit(1);
+						hitPoints -= col.gameObject.GetComponent<AreaDamage>().damage;
+					}
+					else {
+						hitPoints -= 1;
+						particula.Emit(1);
+					}
+				}
+				else {
+					if (col.gameObject.GetComponent<AreaDamage>() != null){
+						particula.Emit(1);
+						hitPoints -= col.gameObject.GetComponent<AreaDamage>().damage;
+					}
+					else {
+						hitPoints -= player.GetComponentInChildren<Shooter>().currentWeapon.bulletDamage;
+						particula.Emit(1);
+					}
+				}
+			}
+		}
 	}
-
 }
