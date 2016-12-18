@@ -5,18 +5,17 @@ public class ZombieController : MonoBehaviour {
 
 	public float moveSpeed;
 	public float rotationSpeed;
+	public float damage;
 
 	private GameObject player;
 
 	GameObject target;
 
 	private Vector3 dir;
-	private Rigidbody rb;
 
 	// Use this for initialization
 	void Start () {
 		target = GameObject.Find ("Player");
-		rb = GetComponent<Rigidbody>();
 
 	}
 
