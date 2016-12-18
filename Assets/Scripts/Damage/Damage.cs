@@ -15,8 +15,7 @@ public class Damage : MonoBehaviour {
 
 
 	void Update () {
-		
-
+				
 		if (hitPoints <= 0){
 			
 			if (isEnemy){
