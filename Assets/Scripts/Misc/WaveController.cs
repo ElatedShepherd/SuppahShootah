@@ -35,6 +35,10 @@ public class WaveController : MonoBehaviour {
 	}		
 	public List <Wave> Waves = new List<Wave>();
 
+	[Header("Canvas")]
+	public Text wave;
+	public Text enemigos;
+
 	// Use this for initialization
 	void Start () {
 		maxEnemies = GetAllEnemiesInWave(Waves[currentWave]);
@@ -42,6 +46,9 @@ public class WaveController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		wave.text = "Wave " + (currentWave + 1).ToString();
+		enemigos.text = "Enemigos Restantes: " + (maxEnemies - enemiesKilled).ToString ();
+
 		if (currentWave > Waves.Count - 1) {
 			SceneManager.LoadScene (nextScene);
 		} else {
