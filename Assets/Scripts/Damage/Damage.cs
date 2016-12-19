@@ -46,22 +46,22 @@ public class Damage : MonoBehaviour {
 			if (1<<col.gameObject.layer == damageLayers[i].value){
 				if (isPlayer){
 					if (col.gameObject.GetComponent<AreaDamage>() != null){
-						particula.Emit(1);
+						particula.Emit(10);
 						hitPoints -= col.gameObject.GetComponent<AreaDamage>().damage;
 					}
 					else {
 						hitPoints -= 1;
-						particula.Emit(1);
+						particula.Emit(10);
 					}
 				}
 				else {
 					if (col.gameObject.GetComponent<AreaDamage>() != null){
-						particula.Emit(1);
+						particula.Emit(10);
 						hitPoints -= col.gameObject.GetComponent<AreaDamage>().damage;
 					}
 					else {
 						hitPoints -= player.GetComponentInChildren<Shooter>().currentWeapon.bulletDamage;
-						particula.Emit(1);
+						particula.Emit(10);
 					}
 				}
 			}
