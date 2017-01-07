@@ -21,9 +21,9 @@ public class LightIntensity : MonoBehaviour {
 		intensidadActual = intensidadLerp;
 		intensidadLerp = Mathf.Lerp (intensidadActual, intensidadA, Time.deltaTime * lerpSpeed);
 
-		if (intensidadA - intensidadActual < 0.1) {
-			intensidadA = Random.Range (2.2f, 3.2f);
-			lerpSpeed = Random.Range (5f, 6f);
+		if (Mathf.Abs(intensidadA - intensidadActual) < 0.1f) {
+			intensidadA = Random.Range (4f, 8f);
+			lerpSpeed = Random.Range (0.6f, 1.2f);
 		}
 
 		luz.intensity = intensidadLerp;

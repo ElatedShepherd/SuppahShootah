@@ -47,7 +47,7 @@ public class WaveController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		wave.text = "Wave " + (currentWave + 1).ToString();
-		enemigos.text = "Enemigos Restantes: " + (maxEnemies - enemiesKilled).ToString ();
+		enemigos.text = "Enemies Remaining: " + (maxEnemies - enemiesKilled).ToString ();
 
 		if (currentWave > Waves.Count - 1) {
 			SceneManager.LoadScene (nextScene);
