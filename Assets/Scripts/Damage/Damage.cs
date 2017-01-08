@@ -28,6 +28,11 @@ public class Damage : MonoBehaviour {
 		if (hitPoints <= 0){
 			
 			if (isEnemy){
+				if (!GetComponent<DropBox>().dropped){
+					GetComponent<DropBox>().dropped = true;
+					GetComponent<DropBox>().Drop();
+				}
+
 				wc.enemiesKilled++;
 				GetComponent<Animator>().SetBool("isDead", true);
 				GetComponent<CapsuleCollider>().enabled = false;
