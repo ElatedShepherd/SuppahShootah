@@ -51,6 +51,7 @@ public class Shooter : MonoBehaviour {
 
 	public CameraFollow mainCamera;
 	public ParticleSystem humo;
+	public ParticleSystem burst;
 
 	// Use this for initialization
 	void Start () {
@@ -117,7 +118,8 @@ public class Shooter : MonoBehaviour {
 			cloneBullet.transform.forward = Quaternion.Euler (new Vector3 (0, bulletAngle, 0)) * transform.forward;
 			cloneBullet.GetComponent<Rigidbody> ().velocity = cloneBullet.transform.forward * currentWeapon.bulletSpeed;
 
-			humo.Emit (10);
+			humo.Emit (5);
+			burst.Emit (10);
 		}
 
 		if (anguloDisparo < currentWeapon.anguloDisparoMax) {
