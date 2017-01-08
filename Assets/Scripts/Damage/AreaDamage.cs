@@ -3,42 +3,53 @@ using System.Collections;
 
 public class AreaDamage : MonoBehaviour {
 
-	[Header("Indicator Variables")]
-	public GameObject splashIndicator;
+	[Header("Variables")]
 	public float radius;
 	public float damage;
 
 	[Header("Timers")]
 	public float tellTime;
 	public float duration;
+	public float destructionOffset;
 
-
+	[Header("Particulas")]
+	public ParticleSystem explosion;
+	public ParticleSystem fuego;
 
 	// Use this for initialization
 	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		StartCoroutine (SpawnAreaDamage(radius, tellTime, duration, destructionOffset));
 	}
 
-	public IEnumerator SpawnAreaDamage (GameObject gb, float r, float tTime, float eTime){
+	public IEnumerator SpawnAreaDamage (float r, float tTime, float eTime, float dTime){
 		
 		Vector3 newScale = new Vector3 (2*r, 2*r, 1f);
-		gb.transform.Rotate (-90, 0, 0);
-		gb.transform.localScale = newScale;
-		gb.GetComponent<SpriteRenderer> ().enabled = true;
+		transform.localScale = newScale;
+
+		GetComponent<SpriteRenderer> ().enabled = true;
 
 		yield return new WaitForSecondsRealtime (tTime);
 
-		gb.GetComponent<CapsuleCollider> ().enabled = true;
+		GetComponent<SphereCollider> ().enabled = true;
+		explosion.Emit(10);
+		fuego.Play();
 
 		yield return new WaitForSecondsRealtime (eTime);
 
+		fuego.loop = false;
+		GetComponent<SphereCollider> ().enabled = false;
+		GetComponent<SpriteRenderer> ().enabled = false;
 
 
+		yield return new WaitForSecondsRealtime (dTime);
 
+		Destroy(gameObject);
+	}
+
+	void OnTriggerStay (Collider col){
+		if (col.gameObject.GetComponent<Damage>().hitPoints > 0) {
+			col.gameObject.GetComponent<Damage>().hitPoints -= damage;
+			col.gameObject.GetComponent<Damage>().particula.Emit(1);
+		}
 	}
 }
