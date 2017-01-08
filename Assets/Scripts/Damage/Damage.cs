@@ -5,11 +5,15 @@ using System.Collections;
 
 public class Damage : MonoBehaviour {
 
-	
+
+	public bool isPlayer;
+	public bool isEnemy = false;
+	[Header("Enemigo")]
+	public float despawnTime = 15;
+	[Header("General")]
 	public float hitPoints; 
 	public float maxHitpoints;
-	public bool isEnemy = false;
-	public bool isPlayer;
+
 	[Space(3)]
 	public LayerMask[] damageLayers;
 
@@ -32,12 +36,7 @@ public class Damage : MonoBehaviour {
 					GetComponent<DropBox>().dropped = true;
 					GetComponent<DropBox>().Drop();
 				}
-
-				wc.enemiesKilled++;
-				GetComponent<Animator>().SetBool("isDead", true);
-				GetComponent<CapsuleCollider>().enabled = false;
-				GetComponent<ZombieController>().enabled = false;
-				this.enabled = false;
+				StartCoroutine(WaitAndDestroy(despawnTime));
 			}
 			else if (isPlayer)
 				SceneManager.LoadScene("Lose");
@@ -70,6 +69,16 @@ public class Damage : MonoBehaviour {
 					}
 				}
 			}
-		}
+		}		
+	}
+
+	IEnumerator WaitAndDestroy (float s){
+		wc.enemiesKilled++;
+		GetComponent<Animator>().SetBool("isDead", true);
+		GetComponent<CapsuleCollider>().enabled = false;
+		GetComponent<ZombieController>().enabled = false;
+		this.enabled = false;
+		yield return new WaitForSeconds(s);
+		Destroy(gameObject);
 	}
 }
