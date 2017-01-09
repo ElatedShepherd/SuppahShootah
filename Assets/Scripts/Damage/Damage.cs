@@ -9,6 +9,7 @@ public class Damage : MonoBehaviour {
 	public bool isPlayer;
 	public bool isEnemy = false;
 	[Header("Enemigo")]
+	public bool isClone;
 	public float despawnTime = 15;
 	[Header("General")]
 	public float hitPoints; 
@@ -73,7 +74,9 @@ public class Damage : MonoBehaviour {
 	}
 
 	IEnumerator WaitAndDestroy (float s){
-		wc.enemiesKilled++;
+		if (!isClone)
+			wc.enemiesKilled++;
+		
 		GetComponent<Animator>().SetBool("isDead", true);
 		GetComponent<CapsuleCollider>().enabled = false;
 		GetComponent<ZombieController>().enabled = false;
