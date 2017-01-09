@@ -22,4 +22,10 @@ public class Explode : MonoBehaviour {
 			}
 		}
 	}
+	void OnCollisionEnter (){
+		if(onContact){
+			exploded = true;	
+			Aoe.GetComponent<AreaDamage>().Explode();
+		}
+	}
 }

@@ -36,13 +36,11 @@ public class AreaDamage : MonoBehaviour {
 		explosion.Play();
 		GetComponent<SphereCollider> ().enabled = true;
 		fuego.Play();
-		fuego.loop = true;
 
 		yield return new WaitForSecondsRealtime (eTime);
 		fuego.loop = false;
 		GetComponent<SpriteRenderer> ().enabled = false;
 		GetComponent<SphereCollider> ().enabled = false;
-
 
 		yield return new WaitForSecondsRealtime (dTime);
 		Destroy(gameObject);
