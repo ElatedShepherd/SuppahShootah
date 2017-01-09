@@ -27,6 +27,7 @@ public class PUController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(!activeBox)
 		currentTime += Time.deltaTime;
 
 		if (currentTime >= SpawnRatio && !activeBox)
